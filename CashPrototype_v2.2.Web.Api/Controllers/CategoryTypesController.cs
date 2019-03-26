@@ -84,7 +84,7 @@ namespace CashPrototype_v2._2.Web.Api.Controllers
 
         // POST: api/CategoryTypes
         [HttpPost]
-        public async Task<ActionResult<CategoryTypeDTO>> PostCategoryType(CategoryTypeDTO categoryTypeDTO)
+        public async Task<ActionResult> PostCategoryType(CategoryTypeDTO categoryTypeDTO)
         {
             try
             {
@@ -102,7 +102,7 @@ namespace CashPrototype_v2._2.Web.Api.Controllers
 
         // DELETE: api/CategoryTypes/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<CategoryTypeDTO>> DeleteCategoryType(int id)
+        public async Task<ActionResult> DeleteCategoryType(int id)
         {
             if (id != _service.GetItemById(id).Result.CategoryTypeId)
             {

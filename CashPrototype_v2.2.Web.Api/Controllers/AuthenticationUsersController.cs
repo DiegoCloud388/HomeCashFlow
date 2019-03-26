@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CashPrototype_v2._2.Web.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/User")]
     [ApiController]
     public class AuthenticationUsersController : ControllerBase
     {
@@ -26,20 +26,29 @@ namespace CashPrototype_v2._2.Web.Api.Controllers
         }
 
         // POST: api/User/Register
-        [HttpGet]
+        [HttpPost]
         [Route("Register")]
         public async Task<ActionResult> PostUser(UserDTO userDTO)
         {
             try
             {
-                await _service.RegistrationUser(userDTO);
+                var result = await _service.RegistrationUser(userDTO);
+                if (result.Succeeded)
+                {
+                    Log.LogInformation("User created a new account with password.");
+                    return Ok();
+                }
 
-                return Ok();
+                else
+                {
+                    Log.LogInformation("User cannot created a new account with password.");
+                    return BadRequest();
+                }
             }
 
             catch (Exception ex)
             {
-                Log.LogError($"Chyba při čtení z databáze: {ex.InnerException}");
+                Log.LogError($"Chyba při zápisu do databáze: {ex.InnerException}");
                 return NotFound();
             }
         }

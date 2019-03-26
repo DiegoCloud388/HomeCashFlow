@@ -1,4 +1,5 @@
 ﻿using CashPrototype_v2._2.Web.Api.Infrastructure.Entities;
+using CashPrototype_v2._2.Web.Api.Infrastructure.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace CashPrototype_v2._2.Web.Api.Infrastructure.Models
             : base(options)
         {
         }
+
+        public DbSet<User> Users { get; set; }
 
         public DbSet<Account> Accounts { get; set; }
         public DbSet<AccountType> AccountTypes { get; set; }
@@ -28,6 +31,35 @@ namespace CashPrototype_v2._2.Web.Api.Infrastructure.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.1-servicing-10028");
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.ToTable("user", "cash");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("Id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.UserName)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserName)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PasswordHash)
+                    .IsRequired()
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+            });
 
             modelBuilder.Entity<Account>(entity =>
             {
@@ -64,13 +96,13 @@ namespace CashPrototype_v2._2.Web.Api.Infrastructure.Models
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.AcAccountTypeIdFkNavigation)
+                entity.HasOne(d => d.AccountType)
                     .WithMany(p => p.Account)
                     .HasForeignKey(d => d.AcAccountTypeIdFk)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Ac_Account_Type_FK");
 
-                entity.HasOne(d => d.AcPersonIdFkNavigation)
+                entity.HasOne(d => d.Person)
                     .WithMany(p => p.Account)
                     .HasForeignKey(d => d.AcPersonIdFk)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -123,7 +155,7 @@ namespace CashPrototype_v2._2.Web.Api.Infrastructure.Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.CategoryTypeIdFkNavigation)
+                entity.HasOne(d => d.CategoryType)
                     .WithMany(p => p.Category)
                     .HasForeignKey(d => d.CategoryTypeIdFk)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -200,7 +232,7 @@ namespace CashPrototype_v2._2.Web.Api.Infrastructure.Models
                     .HasColumnName("P_PersonType_Id")
                     .HasColumnType("int(11)");
 
-                entity.HasOne(d => d.PPersonType)
+                entity.HasOne(d => d.PersonType)
                     .WithMany(p => p.Person)
                     .HasForeignKey(d => d.PPersonTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -251,7 +283,7 @@ namespace CashPrototype_v2._2.Web.Api.Infrastructure.Models
                     .HasMaxLength(3)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.PuCurrency)
+                entity.HasOne(d => d.Currency)
                     .WithMany(p => p.Purchase)
                     .HasForeignKey(d => d.PuCurrencyId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -311,30 +343,30 @@ namespace CashPrototype_v2._2.Web.Api.Infrastructure.Models
                     .HasColumnName("T_Transaction_Type_Id_FK")
                     .HasColumnType("int(5)");
 
-                entity.HasOne(d => d.TAccountIdFkNavigation)
+                entity.HasOne(d => d.Account)
                     .WithMany(p => p.Transaction)
                     .HasForeignKey(d => d.TAccountIdFk)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("T_Account_FK");
 
-                entity.HasOne(d => d.TCategoryIdFkNavigation)
+                entity.HasOne(d => d.Category)
                     .WithMany(p => p.Transaction)
                     .HasForeignKey(d => d.TCategoryIdFk)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("T_Category_FK");
 
-                entity.HasOne(d => d.TPurchaseIdFkNavigation)
+                entity.HasOne(d => d.Purchase)
                     .WithMany(p => p.Transaction)
                     .HasForeignKey(d => d.TPurchaseIdFk)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("T_Purchase_FK");
 
-                entity.HasOne(d => d.TTransactionRetentIdFkNavigation)
+                entity.HasOne(d => d.TransactionRetentive)
                     .WithMany(p => p.Transaction)
                     .HasForeignKey(d => d.TTransactionRetentIdFk)
                     .HasConstraintName("T_Transaction_Retent_FK");
 
-                entity.HasOne(d => d.TTransactionTypeIdFkNavigation)
+                entity.HasOne(d => d.TransactionType)
                     .WithMany(p => p.Transaction)
                     .HasForeignKey(d => d.TTransactionTypeIdFk)
                     .OnDelete(DeleteBehavior.ClientSetNull)

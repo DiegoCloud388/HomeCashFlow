@@ -81,7 +81,7 @@ namespace CashPrototype_v2._2.Web.Api.Controllers
 
         // POST: api/TransactionTypes
         [HttpPost]
-        public async Task<ActionResult<TransactionTypeDTO>> PostTransactionType(TransactionTypeDTO transactionTypeDTO)
+        public async Task<ActionResult> PostTransactionType(TransactionTypeDTO transactionTypeDTO)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace CashPrototype_v2._2.Web.Api.Controllers
 
         // DELETE: api/TransactionTypes/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<TransactionTypeDTO>> DeleteTransactionType(int id)
+        public async Task<ActionResult> DeleteTransactionType(int id)
         {
             if (id != _service.GetItemById(id).Result.TransactionTypeId)
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using CashPrototype_v2._2.Web.Api.Core.AutoMapper;
 using CashPrototype_v2._2.Web.Api.Core.Interfaces;
 using CashPrototype_v2._2.Web.Api.Core.Services;
 using CashPrototype_v2._2.Web.Api.Infrastructure.Entities.Users;
@@ -32,12 +33,10 @@ namespace CashPrototype_v2._2.Web.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CashDbContext>(opt => opt.UseMySQL(Configuration["mySqlConnection:localConnectionString"]));
-            services.AddDbContext<AuthenticationDbContext>(opt => opt.UseMySQL(Configuration["mySqlConnection:localConnectionString"]));
+            //services.AddDbContext<AuthenticationDbContext>(opt => opt.UseMySQL(Configuration["mySqlConnection:localConnectionString"]));
 
-            //services.AddDefaultIdentity<User>().AddEntityFrameworkStores<AuthenticationDbContext>();
-            services.AddIdentity<User, UserRole>().AddEntityFrameworkStores<AuthenticationDbContext>();
-
-            services.AddAutoMapper();
+            services.AddDefaultIdentity<User>().AddEntityFrameworkStores<CashDbContext>();
+            //services.AddIdentity<User, UserRole>().AddEntityFrameworkStores<AuthenticationDbContext>();
 
             services.AddScoped<IServiceAccount, ServiceAccount>();
             services.AddScoped<IServiceAccountType, ServiceAccountType>();
@@ -50,6 +49,9 @@ namespace CashPrototype_v2._2.Web.Api
             services.AddScoped<IServiceTransaction, ServiceTransaction>();
             services.AddScoped<IServiceTransactionType, ServiceTransactionType>();
             services.AddScoped<IServiceTransactionRetentive, ServiceTransactionRetentive>();
+            services.AddScoped<IServiceAuthenticationUser, ServiceAuthenticationUser>();
+
+            services.AddAutoMapper();
 
             services.AddLogging();
 
@@ -57,9 +59,10 @@ namespace CashPrototype_v2._2.Web.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IMapper mapper)
         {
             loggerFactory.CreateLogger("Error");
+            mapper.ConfigurationProvider.AssertConfigurationIsValid();
 
             if (env.IsDevelopment())
             {

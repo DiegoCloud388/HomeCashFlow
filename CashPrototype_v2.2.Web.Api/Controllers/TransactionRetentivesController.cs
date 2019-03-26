@@ -82,7 +82,7 @@ namespace CashPrototype_v2._2.Web.Api.Controllers
 
         // POST: api/TransactionRetentives
         [HttpPost]
-        public async Task<ActionResult<TransactionRetentiveDTO>> PostTransactionRetentive(TransactionRetentiveDTO transactionRetentiveDTO)
+        public async Task<ActionResult> PostTransactionRetentive(TransactionRetentiveDTO transactionRetentiveDTO)
         {
             try
             {
@@ -100,7 +100,7 @@ namespace CashPrototype_v2._2.Web.Api.Controllers
 
         // DELETE: api/TransactionRetentives/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<TransactionRetentiveDTO>> DeleteTransactionRetentive(int id)
+        public async Task<ActionResult> DeleteTransactionRetentive(int id)
         {
             if (id != _service.GetItemById(id).Result.TransactionRetentiveId)
             {

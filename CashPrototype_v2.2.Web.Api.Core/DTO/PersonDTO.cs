@@ -12,7 +12,7 @@ namespace CashPrototype_v2._2.Web.Api.Core.DTO
         public string LastName { get; set; }
         public string Description { get; set; }
 
-        public virtual PersonTypeDTO PPersonType { get; set; }
+        public virtual PersonTypeDTO PersonType { get; set; }
         public virtual ICollection<AccountDTO> Account { get; set; }
     }
 }

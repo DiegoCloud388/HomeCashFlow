@@ -17,10 +17,10 @@ namespace CashPrototype_v2._2.Web.Api.Infrastructure.Entities
         public int? TTransactionRetentIdFk { get; set; }
         public string LoggedUser { get; set; }
 
-        public virtual Account TAccountIdFkNavigation { get; set; }
-        public virtual Category TCategoryIdFkNavigation { get; set; }
-        public virtual Purchase TPurchaseIdFkNavigation { get; set; }
-        public virtual TransactionRetentive TTransactionRetentIdFkNavigation { get; set; }
-        public virtual TransactionType TTransactionTypeIdFkNavigation { get; set; }
+        public virtual Account Account { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual Purchase Purchase { get; set; }
+        public virtual TransactionRetentive TransactionRetentive { get; set; }
+        public virtual TransactionType TransactionType { get; set; }
     }
 }

@@ -23,11 +23,35 @@ namespace CashPrototype_v2._2.Web.Api.Core.Services
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         }
 
-        public async Task RegistrationUser(UserDTO userDTO)
+        public async Task LogInUser(UserDTO userDTO)
+        {
+            var result = await _signInManager.PasswordSignInAsync(
+                userDTO.UserName, userDTO.PasswordHash, isPersistent: false, lockoutOnFailure: true);
+
+            if (result.Succeeded)
+            {
+
+            }
+        }
+
+        public Task LogOutUser(UserDTO userDTO)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IdentityResult> RegistrationUser(UserDTO userDTO)
         {
             var user = Mapper.Map<User>(userDTO);
 
-            await _userManager.CreateAsync(user);
+            var result = await _userManager.CreateAsync(user);
+            if (result.Succeeded)
+            {
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                //var callBackUrl = Url.Page("/Account/ConfirmEmail", page)
+                await _signInManager.SignInAsync(userDTO, false);
+            }
+
+            return result;
         }
     }
 }

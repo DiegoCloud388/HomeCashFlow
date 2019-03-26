@@ -17,7 +17,7 @@ namespace CashPrototype_v2._2.Web.Api.Infrastructure.Entities
         public string Description { get; set; }
         public int CategoryTypeIdFk { get; set; }
 
-        public virtual CategoryType CategoryTypeIdFkNavigation { get; set; }
+        public virtual CategoryType CategoryType { get; set; }
         public virtual ICollection<Transaction> Transaction { get; set; }
     }
 }

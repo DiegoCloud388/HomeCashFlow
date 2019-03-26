@@ -82,7 +82,7 @@ namespace CashPrototype_v2._2.Web.Api.Controllers
 
         // POST: api/Currencies
         [HttpPost]
-        public async Task<ActionResult<CurrencyDTO>> PostCurrency(CurrencyDTO currencyDTO)
+        public async Task<ActionResult> PostCurrency(CurrencyDTO currencyDTO)
         {
             try
             {
@@ -100,7 +100,7 @@ namespace CashPrototype_v2._2.Web.Api.Controllers
 
         // DELETE: api/Currencies/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<CurrencyDTO>> DeleteCurrency(string id)
+        public async Task<ActionResult> DeleteCurrency(string id)
         {
             if (id != _service.GetItemById(id).Result.CurrencyCode)
             {

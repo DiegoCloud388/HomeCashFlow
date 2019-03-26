@@ -82,7 +82,7 @@ namespace CashPrototype_v2._2.Web.Api.Controllers
 
         // POST: api/PersonTypes
         [HttpPost]
-        public async Task<ActionResult<PersonTypeDTO>> PostPersonType(PersonTypeDTO personTypeDTO)
+        public async Task<ActionResult> PostPersonType(PersonTypeDTO personTypeDTO)
         {
             try
             {
@@ -100,7 +100,7 @@ namespace CashPrototype_v2._2.Web.Api.Controllers
 
         // DELETE: api/PersonTypes/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<PersonTypeDTO>> DeletePersonType(int id)
+        public async Task<ActionResult> DeletePersonType(int id)
         {
             if (id != _service.GetItemById(id).Result.PersonTypeId)
             {
