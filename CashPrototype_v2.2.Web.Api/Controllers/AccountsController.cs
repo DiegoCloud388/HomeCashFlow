@@ -1,0 +1,122 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using CashPrototype_v2._2.Web.Api.Core.Interfaces;
+using Microsoft.Extensions.Logging;
+using CashPrototype_v2._2.Web.Api.Core.DTO;
+
+namespace CashPrototype_v2._2.Web.Api.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AccountsController : ControllerBase
+    {
+        private readonly IServiceAccount _service;
+        private ILogger<AccountsController> Log;
+
+        public AccountsController(IServiceAccount service, ILogger<AccountsController> log)
+        {
+            _service = service ?? throw new ArgumentNullException(nameof(service));
+            Log = log ?? throw new ArgumentNullException(nameof(log));
+        }
+
+        // GET: api/Accounts
+        [HttpGet]
+        public async Task<ActionResult<List<AccountDTO>>> GetAccounts()
+        {
+            try
+            {
+                return await _service.GetAllItems();
+            }
+
+            catch (Exception ex)
+            {
+                Log.LogError($"Chyba při čtení z databáze: {ex.InnerException}");
+                return NotFound();
+            }
+        }
+
+        // GET: api/Accounts/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<AccountDTO>> GetAccount(int id)
+        {
+            try
+            {
+                return await _service.GetItemById(id);          
+            }
+
+            catch (Exception ex)
+            {
+                Log.LogError($"Chyba při čtení z databáze: {ex.InnerException}");
+                return NotFound();
+            }
+        }
+
+        // PUT: api/Accounts/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutAccount(int id, AccountDTO account)
+        {
+            if (id != account.AccountId)
+            {
+                Log.LogError($"Chyba!!! Záznam s tímto Id nebyl nalezen.");
+                return BadRequest();
+            }
+
+            try
+            {
+                await _service.UpdateItem(account);
+
+                return CreatedAtAction("GetAccount", new { id = account.AccountId }, id);
+            }
+
+            catch (Exception ex)
+            {
+                Log.LogError($"Chyba při ukládání do databáze: {ex.InnerException}");
+                return NotFound();
+            }
+        }
+
+        // POST: api/Accounts
+        [HttpPost]
+        public async Task<ActionResult<AccountDTO>> PostAccount(AccountDTO account)
+        {
+            try
+            {
+                await _service.InsertItem(account);
+
+                return CreatedAtAction("GetAccount", new { id = account.AccountId }, account);
+            }
+
+            catch (Exception ex)
+            {
+                Log.LogError($"Chyba při ukládání do databáze: {ex.InnerException}");
+                return NotFound();
+            }
+        }
+
+        // DELETE: api/Accounts/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<AccountDTO>> DeleteAccount(int id)
+        {
+            if (id != _service.GetItemById(id).Result.AccountId)
+            {
+                Log.LogError($"Chyba!!! Záznam s tímto Id nebyl nalezen.");
+                return BadRequest();
+            }
+
+            try
+            {
+                await _service.DeleteItem(id);
+
+                return Ok();
+            }
+
+            catch (Exception ex)
+            {
+                Log.LogError($"Chyba při ukládání do databáze: {ex.InnerException}");
+                return NotFound();
+            }
+        }
+    }
+}

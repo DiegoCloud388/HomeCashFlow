@@ -1,0 +1,86 @@
+﻿using AutoMapper;
+using CashPrototype_v2._2.Web.Api.Core.DTO;
+using CashPrototype_v2._2.Web.Api.Core.Interfaces;
+using CashPrototype_v2._2.Web.Api.Infrastructure.Entities;
+using CashPrototype_v2._2.Web.Api.Infrastructure.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CashPrototype_v2._2.Web.Api.Core.Services
+{
+    public class ServiceAccount : IServiceAccount
+    {
+        private readonly CashDbContext _dbContext;
+        private readonly IMapper _mapper;
+
+        public ServiceAccount(CashDbContext dbContext, IMapper mapper)
+        {
+            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<AccountDTO>> GetAllItems()
+        {
+            return await _mapper.Map<Task<List<AccountDTO>>>(_dbContext.Accounts.ToListAsync());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<AccountDTO> GetItemById(int id)
+        {
+            return await _mapper.Map<Task<AccountDTO>>(_dbContext.Accounts.FindAsync(id));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="accountDTO"></param>
+        /// <returns></returns>
+        public async Task InsertItem(AccountDTO accountDTO)
+        {
+            var accountEntity = _mapper.Map<Account>(accountDTO);
+
+            _dbContext.Accounts.Add(accountEntity);
+
+            await _dbContext.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="accountDTO"></param>
+        /// <returns></returns>
+        public async Task UpdateItem(AccountDTO accountDTO)
+        {
+            var accountEntity = _mapper.Map<Account>(accountDTO);
+
+            _dbContext.Accounts.Update(accountEntity);
+
+            await _dbContext.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task DeleteItem(int id)
+        {
+            var account = await _dbContext.Accounts.FindAsync(id);
+
+            _dbContext.Accounts.Remove(account);
+
+            await _dbContext.SaveChangesAsync();
+        }
+    }
+}

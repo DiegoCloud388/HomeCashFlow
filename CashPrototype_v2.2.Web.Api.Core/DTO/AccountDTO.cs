@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+
+namespace CashPrototype_v2._2.Web.Api.Core.DTO
+{
+    public class AccountDTO
+    {
+        [Key]
+        public int AccountId { get; set; }
+
+        public int? BankCode { get; set; }
+
+        [Required(ErrorMessage = "Název účtu nemůže být prázdný!")]
+        [StringLength(60, ErrorMessage = "Název účtu je příliš dlouhý!")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "Počáteční zůstatek nemůže být prázdný!")]
+        public decimal FirstBalanceRange { get; set; }
+
+        public int AcAccountTypeIdFk { get; set; }
+        public int AcPersonIdFk { get; set; }
+        public string Description { get; set; }
+
+        public virtual AccountTypeDTO AccountType { get; set; }
+        public virtual PersonDTO Person { get; set; }
+        public virtual ICollection<TransactionDTO> Transaction { get; set; }
+    }
+}
