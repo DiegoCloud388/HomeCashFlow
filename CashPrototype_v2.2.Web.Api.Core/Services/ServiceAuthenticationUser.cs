@@ -12,26 +12,28 @@ namespace CashPrototype_v2._2.Web.Api.Core.Services
 {
     public class ServiceAuthenticationUser : IServiceAuthenticationUser
     {
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<UserDTO> _signInManager;
-        private readonly IMapper _mapper;
+        private UserManager<User> _userManager;
+        //private SignInManager<UserDTO> _signInManager;
+        private IMapper _mapper;
 
-        public ServiceAuthenticationUser(UserManager<User> userManager, SignInManager<UserDTO> signInManager, IMapper mapper)
+        public ServiceAuthenticationUser(UserManager<User> userManager, IMapper mapper)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
+            //_signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         }
 
-        public async Task LogInUser(UserDTO userDTO)
+        public Task LogInUser(UserDTO userDTO)
         {
-            var result = await _signInManager.PasswordSignInAsync(
-                userDTO.UserName, userDTO.PasswordHash, isPersistent: false, lockoutOnFailure: true);
+            //var result = await _signInManager.PasswordSignInAsync(
+            //    userDTO.UserName, userDTO.PasswordHash, isPersistent: false, lockoutOnFailure: true);
 
-            if (result.Succeeded)
-            {
+            //if (result.Succeeded)
+            //{
 
-            }
+            //}
+
+            throw new NotImplementedException();
         }
 
         public Task LogOutUser(UserDTO userDTO)
@@ -42,16 +44,24 @@ namespace CashPrototype_v2._2.Web.Api.Core.Services
         public async Task<IdentityResult> RegistrationUser(UserDTO userDTO)
         {
             var user = Mapper.Map<User>(userDTO);
-
-            var result = await _userManager.CreateAsync(user);
-            if (result.Succeeded)
+            try
             {
-                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                //var callBackUrl = Url.Page("/Account/ConfirmEmail", page)
-                await _signInManager.SignInAsync(userDTO, false);
+                var result = await _userManager.CreateAsync(user, user.PasswordHash);
+
+                if (result.Succeeded)
+                {
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //var callBackUrl = Url.Page("/Account/ConfirmEmail", page)
+                    //await _signInManager.SignInAsync(userDTO, false);
+                }
+
+                return result;
             }
 
-            return result;
+            catch(Exception ex)
+            {
+                throw ex.InnerException;
+            }
         }
     }
 }

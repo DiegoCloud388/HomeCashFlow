@@ -33,10 +33,10 @@ namespace CashPrototype_v2._2.Web.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CashDbContext>(opt => opt.UseMySQL(Configuration["mySqlConnection:localConnectionString"]));
-            //services.AddDbContext<AuthenticationDbContext>(opt => opt.UseMySQL(Configuration["mySqlConnection:localConnectionString"]));
+            services.AddDbContext<AuthenticationDbContext>(opt => opt.UseMySQL(Configuration["mySqlConnection:localConnectionStringAuth"]));
 
-            services.AddDefaultIdentity<User>().AddEntityFrameworkStores<CashDbContext>();
-            //services.AddIdentity<User, UserRole>().AddEntityFrameworkStores<AuthenticationDbContext>();
+            //services.AddDefaultIdentity<User>().AddEntityFrameworkStores<CashDbContext>();
+            services.AddIdentity<User, UserRole>().AddEntityFrameworkStores<AuthenticationDbContext>();
 
             services.AddScoped<IServiceAccount, ServiceAccount>();
             services.AddScoped<IServiceAccountType, ServiceAccountType>();

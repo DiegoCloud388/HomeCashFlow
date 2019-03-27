@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CashPrototype_v2._2.Web.Api.Controllers
 {
-    [Route("api/User")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AuthenticationUsersController : ControllerBase
     {
@@ -25,7 +25,7 @@ namespace CashPrototype_v2._2.Web.Api.Controllers
             Log = log ?? throw new ArgumentNullException(nameof(log));
         }
 
-        // POST: api/User/Register
+        // POST: api/AuthenticationUsers/Register
         [HttpPost]
         [Route("Register")]
         public async Task<ActionResult> PostUser(UserDTO userDTO)

@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using CashPrototype_v2._2.Web.Api.Infrastructure;
+using CashPrototype_v2._2.Web.Api.Infrastructure.Models;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -23,7 +26,7 @@ namespace CashPrototype_v2._2.Web.Api
 
                 try
                 {
-                    //var context = services.GetRequiredService<CashDbContext>();
+                    var context = services.GetRequiredService<CashDbContext>();
 
                     //context.Database.Migrate();
                     //SeedDatabase.Initialize(services);
