@@ -26,10 +26,10 @@ namespace CashPrototype_v2._2.Web.Api
 
                 try
                 {
-                    var context = services.GetRequiredService<CashDbContext>();
+                    //var context = services.GetRequiredService<AuthenticationDbContext>();
 
                     //context.Database.Migrate();
-                    //SeedDatabase.Initialize(services);
+                    SeedDatabase.Initialize(services);
                 }
 
                 catch (Exception ex)

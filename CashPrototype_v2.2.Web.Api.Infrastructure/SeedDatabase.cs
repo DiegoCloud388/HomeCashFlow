@@ -18,18 +18,23 @@ namespace CashPrototype_v2._2.Web.Api.Infrastructure
             }
         }
 
-        private static void SeedUsers(AuthenticationDbContext dbContext)
+        private static async void SeedUsers(AuthenticationDbContext dbContext)
         {
-            dbContext.Users.Add(
+            await dbContext.Users.AddRangeAsync(
                 new Entities.Users.User
                 {
-                    UserName = "Test",
-                    UserLastName = "Novotny",
-                    Email = "alfabeta@email.cz",
-                    PasswordHash = "Abcd1234@"                     
+                    //UserName = "Test",
+                    AccessFailedCount = 3,
+                    LockoutEnabled = false,
+                    //UserLastName = "Novotny",
+                    EmailConfirmed = false,
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    //Email = "alfabeta@email.cz",
+                    //PasswordHash = "Abcd1234@"
                 });
 
-            dbContext.SaveChanges();
+            await dbContext.SaveChangesAsync();
         }
     }
 }

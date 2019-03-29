@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CashPrototype_v2._2.Web.Api.Infrastructure.Migrations
 {
     [DbContext(typeof(AuthenticationDbContext))]
-    [Migration("20190327092934_IntialCreate")]
+    [Migration("20190327135237_IntialCreate")]
     partial class IntialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,18 +21,13 @@ namespace CashPrototype_v2._2.Web.Api.Infrastructure.Migrations
             modelBuilder.Entity("CashPrototype_v2._2.Web.Api.Infrastructure.Entities.Users.User", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("Id")
-                        .HasColumnType("int(11)");
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
 
                     b.Property<string>("ConcurrencyStamp");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .IsUnicode(false);
+                    b.Property<string>("Email");
 
                     b.Property<bool>("EmailConfirmed");
 
@@ -44,10 +39,7 @@ namespace CashPrototype_v2._2.Web.Api.Infrastructure.Migrations
 
                     b.Property<string>("NormalizedUserName");
 
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasMaxLength(45)
-                        .IsUnicode(false);
+                    b.Property<string>("PasswordHash");
 
                     b.Property<string>("PhoneNumber");
 
@@ -57,19 +49,29 @@ namespace CashPrototype_v2._2.Web.Api.Infrastructure.Migrations
 
                     b.Property<bool>("TwoFactorEnabled");
 
-                    b.Property<string>("UserLastName")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .IsUnicode(false);
+                    b.Property<string>("UserLastName");
 
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .IsUnicode(false);
+                    b.Property<string>("UserName");
 
                     b.HasKey("Id");
 
-                    b.ToTable("user","authentication");
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("CashPrototype_v2._2.Web.Api.Infrastructure.Entities.Users.UserRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ConcurrencyStamp");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("NormalizedName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserRoles");
                 });
 #pragma warning restore 612, 618
         }
