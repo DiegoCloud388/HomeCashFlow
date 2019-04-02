@@ -7,15 +7,11 @@ using System.Text;
 
 namespace CashPrototype_v2._2.Web.Api.Infrastructure.Models
 {
-    public class AuthenticationDbContext : DbContext
+    public class AuthenticationDbContext : IdentityDbContext<User, UserRole, int>
     {
         public AuthenticationDbContext(DbContextOptions<AuthenticationDbContext> options)
             : base(options)
         {
         }
-
-        public DbSet<User> Users { get; set; }
-
-        public DbSet<UserRole> UserRoles { get; set; }
     }
 }

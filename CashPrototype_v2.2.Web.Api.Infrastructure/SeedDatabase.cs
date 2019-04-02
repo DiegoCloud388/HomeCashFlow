@@ -15,6 +15,9 @@ namespace CashPrototype_v2._2.Web.Api.Infrastructure
                 serviceProvider.GetRequiredService<DbContextOptions<AuthenticationDbContext>>()))
             {
                 SeedUsers(context);
+                SeedUserRoles(context);
+
+                context.SaveChangesAsync();
             }
         }
 
@@ -23,18 +26,26 @@ namespace CashPrototype_v2._2.Web.Api.Infrastructure
             await dbContext.Users.AddRangeAsync(
                 new Entities.Users.User
                 {
-                    //UserName = "Test",
-                    AccessFailedCount = 3,
-                    LockoutEnabled = false,
-                    //UserLastName = "Novotny",
-                    EmailConfirmed = false,
-                    PhoneNumberConfirmed = false,
-                    TwoFactorEnabled = false,
-                    //Email = "alfabeta@email.cz",
+                    UserName = "Test",
+                    //AccessFailedCount = 3,
+                    //LockoutEnabled = false,
+                    UserLastName = "Novotny",
+                    //EmailConfirmed = 1,
+                    //PhoneNumberConfirmed = false,
+                    //TwoFactorEnabled = false,                    
+                    Email = "alfabeta@email.cz",
                     //PasswordHash = "Abcd1234@"
                 });
+        }
 
-            await dbContext.SaveChangesAsync();
+        private static async void SeedUserRoles(AuthenticationDbContext dbContext)
+        {
+            await dbContext.UserRoles.AddRangeAsync(
+                new Microsoft.AspNetCore.Identity.IdentityUserRole<int>()
+                {
+                    RoleId = 1,
+                    UserId = 1
+                });
         }
     }
 }
