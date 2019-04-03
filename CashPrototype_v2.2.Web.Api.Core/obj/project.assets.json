@@ -4425,11 +4425,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api.Core\\CashPrototype_v2.2.Web.Api.Core.csproj",
+      "projectUniqueName": "c:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api.Core\\CashPrototype_v2.2.Web.Api.Core.csproj",
       "projectName": "CashPrototype_v2.2.Web.Api.Core",
-      "projectPath": "C:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api.Core\\CashPrototype_v2.2.Web.Api.Core.csproj",
+      "projectPath": "c:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api.Core\\CashPrototype_v2.2.Web.Api.Core.csproj",
       "packagesPath": "C:\\Users\\N029242\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api.Core\\obj\\",
+      "outputPath": "c:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -4448,8 +4448,8 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "C:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api.Infrastructure\\CashPrototype_v2.2.Web.Api.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api.Infrastructure\\CashPrototype_v2.2.Web.Api.Infrastructure.csproj"
+            "c:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api.Infrastructure\\CashPrototype_v2.2.Web.Api.Infrastructure.csproj": {
+              "projectPath": "c:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api.Infrastructure\\CashPrototype_v2.2.Web.Api.Infrastructure.csproj"
             }
           }
         }

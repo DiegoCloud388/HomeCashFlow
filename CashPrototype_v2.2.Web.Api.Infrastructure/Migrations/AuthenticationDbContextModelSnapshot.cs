@@ -29,9 +29,9 @@ namespace CashPrototype_v2._2.Web.Api.Infrastructure.Migrations
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
-                    b.Property<bool>("EmailConfirmed");
+                    b.Property<bool>("EmailConfirmed").HasConversion(new BoolToZeroOneConverter<Int16>());
 
-                    b.Property<bool>("LockoutEnabled");
+                    b.Property<bool>("LockoutEnabled").HasConversion(new BoolToZeroOneConverter<Int16>());
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
@@ -45,11 +45,11 @@ namespace CashPrototype_v2._2.Web.Api.Infrastructure.Migrations
 
                     b.Property<string>("PhoneNumber");
 
-                    b.Property<bool>("PhoneNumberConfirmed");
+                    b.Property<bool>("PhoneNumberConfirmed").HasConversion(new BoolToZeroOneConverter<Int16>());
 
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<bool>("TwoFactorEnabled");
+                    b.Property<bool>("TwoFactorEnabled").HasConversion(new BoolToZeroOneConverter<Int16>());
 
                     b.Property<string>("UserLastName");
 

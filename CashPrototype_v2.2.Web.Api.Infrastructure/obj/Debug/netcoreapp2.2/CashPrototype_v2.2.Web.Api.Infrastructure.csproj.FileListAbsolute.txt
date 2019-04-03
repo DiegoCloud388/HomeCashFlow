@@ -11,3 +11,4 @@ C:\Users\N029242\source\repos\CashPrototype_v2.0\CashPrototype_v2.2.Web.Api.Infr
 C:\Users\N029242\source\repos\CashPrototype_v2.0\CashPrototype_v2.2.Web.Api.Infrastructure\obj\Debug\netcoreapp2.2\CashPrototype_v2.2.Web.Api.Infrastructure.pdb
 C:\Users\N029242\source\repos\CashPrototype_v2.0\CashPrototype_v2.2.Web.Api.Infrastructure\bin\Debug\netcoreapp2.2\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\N029242\source\repos\CashPrototype_v2.0\CashPrototype_v2.2.Web.Api.Infrastructure\bin\Debug\netcoreapp2.2\Microsoft.Extensions.Identity.Stores.xml
+C:\Users\N029242\source\repos\CashPrototype_v2.0\CashPrototype_v2.2.Web.Api.Infrastructure\obj\Debug\netcoreapp2.2\CashPrototype_v2.2.Web.Api.Infrastructure.csprojAssemblyReference.cache
