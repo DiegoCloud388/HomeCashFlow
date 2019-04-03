@@ -48,7 +48,7 @@ namespace CashPrototype_v2._2.Web.Api.Controllers
 
             catch (Exception ex)
             {
-                Log.LogError($"Chyba při zápisu do databáze: {ex.InnerException}");
+                Log.LogError($"Chyba při zápisu do databáze: {ex.InnerException}, {ex.Message}, {ex.Data}, {ex.Source}, {ex.StackTrace}");
                 return NotFound();
             }
         }
