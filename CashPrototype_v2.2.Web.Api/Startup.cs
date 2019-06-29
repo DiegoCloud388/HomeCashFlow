@@ -37,6 +37,8 @@ namespace CashPrototype_v2._2.Web.Api
 
             services.AddIdentity<User, UserRole>().AddEntityFrameworkStores<AuthenticationDbContext>();
 
+            services.AddCors();
+
             services.AddScoped<IServiceAccount, ServiceAccount>();
             services.AddScoped<IServiceAccountType, ServiceAccountType>();
             services.AddScoped<IServiceCategory, ServiceCategory>();
@@ -50,7 +52,7 @@ namespace CashPrototype_v2._2.Web.Api
             services.AddScoped<IServiceTransactionRetentive, ServiceTransactionRetentive>();
             services.AddScoped<IServiceAuthenticationUser, ServiceAuthenticationUser>();
 
-            services.AddAutoMapper();
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddLogging();
 
@@ -75,6 +77,7 @@ namespace CashPrototype_v2._2.Web.Api
                 app.UseHsts();
             }
 
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod());
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseMvc();

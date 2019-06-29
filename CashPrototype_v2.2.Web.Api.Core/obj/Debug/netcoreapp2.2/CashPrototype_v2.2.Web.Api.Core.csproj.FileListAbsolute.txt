@@ -10,7 +10,3 @@ C:\Users\N029242\source\repos\CashPrototype_v2.0\CashPrototype_v2.2.Web.Api.Core
 C:\Users\N029242\source\repos\CashPrototype_v2.0\CashPrototype_v2.2.Web.Api.Core\obj\Debug\netcoreapp2.2\CashPrototype_v2.2.Web.Api.Core.csproj.CopyComplete
 C:\Users\N029242\source\repos\CashPrototype_v2.0\CashPrototype_v2.2.Web.Api.Core\obj\Debug\netcoreapp2.2\CashPrototype_v2.2.Web.Api.Core.dll
 C:\Users\N029242\source\repos\CashPrototype_v2.0\CashPrototype_v2.2.Web.Api.Core\obj\Debug\netcoreapp2.2\CashPrototype_v2.2.Web.Api.Core.pdb
-C:\Users\N029242\source\repos\CashPrototype_v2.0\CashPrototype_v2.2.Web.Api.Core\bin\Debug\netcoreapp2.2\Microsoft.Extensions.Identity.Stores.dll
-C:\Users\N029242\source\repos\CashPrototype_v2.0\CashPrototype_v2.2.Web.Api.Core\bin\Debug\netcoreapp2.2\Microsoft.Extensions.Identity.Stores.xml
-C:\Users\N029242\source\repos\CashPrototype_v2.0\CashPrototype_v2.2.Web.Api.Core\bin\Debug\netcoreapp2.2\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
-C:\Users\N029242\source\repos\CashPrototype_v2.0\CashPrototype_v2.2.Web.Api.Core\bin\Debug\netcoreapp2.2\Microsoft.AspNetCore.Identity.EntityFrameworkCore.xml

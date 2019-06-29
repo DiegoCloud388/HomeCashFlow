@@ -1,0 +1,218 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api\\CashPrototype_v2.2.Web.Api.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api.Core\\CashPrototype_v2.2.Web.Api.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api.Core\\CashPrototype_v2.2.Web.Api.Core.csproj",
+        "projectName": "CashPrototype_v2.2.Web.Api.Core",
+        "projectPath": "C:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api.Core\\CashPrototype_v2.2.Web.Api.Core.csproj",
+        "packagesPath": "C:\\Users\\N029242\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\N029242\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "C:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api.Infrastructure\\CashPrototype_v2.2.Web.Api.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api.Infrastructure\\CashPrototype_v2.2.Web.Api.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[8.1.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "Microsoft.TypeScript.MSBuild": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.5.0, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "C:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api.Infrastructure\\CashPrototype_v2.2.Web.Api.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api.Infrastructure\\CashPrototype_v2.2.Web.Api.Infrastructure.csproj",
+        "projectName": "CashPrototype_v2.2.Web.Api.Infrastructure",
+        "projectPath": "C:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api.Infrastructure\\CashPrototype_v2.2.Web.Api.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\N029242\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\N029242\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.3, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "Microsoft.TypeScript.MSBuild": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.5.0, )"
+            },
+            "MySql.Data.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.15, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "C:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api\\CashPrototype_v2.2.Web.Api.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api\\CashPrototype_v2.2.Web.Api.csproj",
+        "projectName": "CashPrototype_v2.2.Web.Api",
+        "projectPath": "C:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api\\CashPrototype_v2.2.Web.Api.csproj",
+        "packagesPath": "C:\\Users\\N029242\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\N029242\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "C:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api.Core\\CashPrototype_v2.2.Web.Api.Core.csproj": {
+                "projectPath": "C:\\Users\\N029242\\source\\repos\\CashPrototype_v2.0\\CashPrototype_v2.2.Web.Api.Core\\CashPrototype_v2.2.Web.Api.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[8.1.0, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[6.1.0, )"
+            },
+            "Microsoft.AspNetCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}
