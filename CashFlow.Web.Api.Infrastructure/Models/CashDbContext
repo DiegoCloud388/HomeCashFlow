@@ -1,0 +1,379 @@
+using CashPrototype_v2._2.Web.Api.Infrastructure.Entities;
+using CashPrototype_v2._2.Web.Api.Infrastructure.Entities.Users;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace CashPrototype_v2._2.Web.Api.Infrastructure.Models
+{
+    public class CashDbContext : DbContext
+    {
+        public CashDbContext(DbContextOptions<CashDbContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<AccountType> AccountTypes { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<CategoryType> CategoryTypes { get; set; }
+        public DbSet<Currency> Currencies { get; set; }
+        public DbSet<Person> People { get; set; }
+        public DbSet<PersonType> PersonTypes { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<TransactionType> TransactionTypes { get; set; }
+        public DbSet<TransactionRetentive> TransactionRetentives { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.HasAnnotation("ProductVersion", "2.2.1-servicing-10028");
+
+            modelBuilder.Entity<Account>(entity =>
+            {
+                entity.ToTable("account", "cash");
+
+                entity.HasIndex(e => e.AcAccountTypeIdFk)
+                    .HasName("Ac_Account_Type_FK_idx");
+
+                entity.HasIndex(e => e.AcPersonIdFk)
+                    .HasName("Ac_Person_FK_idx");
+
+                entity.Property(e => e.AccountId)
+                    .HasColumnName("Account_Id")
+                    .HasColumnType("int(15)");
+
+                entity.Property(e => e.AcAccountTypeIdFk)
+                    .HasColumnName("Ac_Account_Type_Id_FK")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.AcPersonIdFk)
+                    .HasColumnName("Ac_Person_Id_FK")
+                    .HasColumnType("int(5)");
+
+                entity.Property(e => e.BankCode).HasColumnType("int(4)");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FirstBalanceRange).HasColumnType("decimal(10,0)");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.AccountType)
+                    .WithMany(p => p.Account)
+                    .HasForeignKey(d => d.AcAccountTypeIdFk)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Ac_Account_Type_FK");
+
+                entity.HasOne(d => d.Person)
+                    .WithMany(p => p.Account)
+                    .HasForeignKey(d => d.AcPersonIdFk)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Ac_Person_FK");
+            });
+
+            modelBuilder.Entity<AccountType>(entity =>
+            {
+                entity.ToTable("account_type", "cash");
+
+                entity.Property(e => e.AccountTypeId)
+                    .HasColumnName("Account_Type_Id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Category>(entity =>
+            {
+                entity.ToTable("category", "cash");
+
+                entity.HasIndex(e => e.CategoryTypeIdFk)
+                    .HasName("Category_Type_FK_idx");
+
+                entity.Property(e => e.CategoryId)
+                    .HasColumnName("Category_Id")
+                    .HasColumnType("int(6)");
+
+                entity.Property(e => e.CategoryTypeIdFk)
+                    .HasColumnName("Category_Type_Id_FK")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Subname)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.CategoryType)
+                    .WithMany(p => p.Category)
+                    .HasForeignKey(d => d.CategoryTypeIdFk)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Category_Type_FK");
+            });
+
+            modelBuilder.Entity<CategoryType>(entity =>
+            {
+                entity.ToTable("category_type", "cash");
+
+                entity.Property(e => e.CategoryTypeId)
+                    .HasColumnName("CategoryType_Id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Currency>(entity =>
+            {
+                entity.HasKey(e => e.CurrencyCode);
+
+                entity.ToTable("currency", "cash");
+
+                entity.Property(e => e.CurrencyCode)
+                    .HasColumnName("Currency_Code")
+                    .HasMaxLength(3)
+                    .IsUnicode(false)
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ExchangeRate).HasColumnType("decimal(5,2)");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Person>(entity =>
+            {
+                entity.ToTable("person", "cash");
+
+                entity.HasIndex(e => e.PPersonTypeId)
+                    .HasName("P_Person_Type_FK_idx");
+
+                entity.Property(e => e.PersonId)
+                    .HasColumnName("Person_Id")
+                    .HasColumnType("int(5)");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .HasMaxLength(35)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LastName)
+                    .HasMaxLength(35)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PPersonTypeId)
+                    .HasColumnName("P_PersonType_Id")
+                    .HasColumnType("int(11)");
+
+                entity.HasOne(d => d.PersonType)
+                    .WithMany(p => p.Person)
+                    .HasForeignKey(d => d.PPersonTypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("P_Person_Type_FK");
+            });
+
+            modelBuilder.Entity<PersonType>(entity =>
+            {
+                entity.ToTable("person_type", "cash");
+
+                entity.Property(e => e.PersonTypeId)
+                    .HasColumnName("PersonType_id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Purchase>(entity =>
+            {
+                entity.ToTable("purchase", "cash");
+
+                entity.HasIndex(e => e.PuCurrencyId)
+                    .HasName("Pu_Currency_FK_idx");
+
+                entity.Property(e => e.PurchaseId)
+                    .HasColumnName("Purchase_Id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PuCurrencyId)
+                    .IsRequired()
+                    .HasColumnName("Pu_Currency_Id")
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Currency)
+                    .WithMany(p => p.Purchase)
+                    .HasForeignKey(d => d.PuCurrencyId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Pu_Currency_FK");
+            });
+
+            modelBuilder.Entity<Transaction>(entity =>
+            {
+                entity.ToTable("transaction", "cash");
+
+                entity.HasIndex(e => e.TAccountIdFk)
+                    .HasName("T_Account_FK_idx");
+
+                entity.HasIndex(e => e.TCategoryIdFk)
+                    .HasName("T_Category_FK_idx");
+
+                entity.HasIndex(e => e.TPurchaseIdFk)
+                    .HasName("T_Purchase_FK_idx");
+
+                entity.HasIndex(e => e.TTransactionRetentIdFk)
+                    .HasName("T_Transaction_Reten_FK_idx");
+
+                entity.HasIndex(e => e.TTransactionTypeIdFk)
+                    .HasName("T_Transaction_Type_FK_idx");
+
+                entity.Property(e => e.TransactionId)
+                    .HasColumnName("Transaction_Id")
+                    .HasColumnType("int(5)");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LoggedUser)
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Price).HasColumnType("decimal(6,0)");
+
+                entity.Property(e => e.TAccountIdFk)
+                    .HasColumnName("T_Account_Id_FK")
+                    .HasColumnType("int(5)");
+
+                entity.Property(e => e.TCategoryIdFk)
+                    .HasColumnName("T_Category_Id_FK")
+                    .HasColumnType("int(6)");
+
+                entity.Property(e => e.TPurchaseIdFk)
+                    .HasColumnName("T_Purchase_Id_FK")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.TTransactionRetentIdFk)
+                    .HasColumnName("T_Transaction_Retent_Id_FK")
+                    .HasColumnType("int(5)");
+
+                entity.Property(e => e.TTransactionTypeIdFk)
+                    .HasColumnName("T_Transaction_Type_Id_FK")
+                    .HasColumnType("int(5)");
+
+                entity.HasOne(d => d.Account)
+                    .WithMany(p => p.Transaction)
+                    .HasForeignKey(d => d.TAccountIdFk)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("T_Account_FK");
+
+                entity.HasOne(d => d.Category)
+                    .WithMany(p => p.Transaction)
+                    .HasForeignKey(d => d.TCategoryIdFk)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("T_Category_FK");
+
+                entity.HasOne(d => d.Purchase)
+                    .WithMany(p => p.Transaction)
+                    .HasForeignKey(d => d.TPurchaseIdFk)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("T_Purchase_FK");
+
+                entity.HasOne(d => d.TransactionRetentive)
+                    .WithMany(p => p.Transaction)
+                    .HasForeignKey(d => d.TTransactionRetentIdFk)
+                    .HasConstraintName("T_Transaction_Retent_FK");
+
+                entity.HasOne(d => d.TransactionType)
+                    .WithMany(p => p.Transaction)
+                    .HasForeignKey(d => d.TTransactionTypeIdFk)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("T_Transaction_Type_FK");
+            });
+
+            modelBuilder.Entity<TransactionRetentive>(entity =>
+            {
+                entity.ToTable("transaction_retentive", "cash");
+
+                entity.Property(e => e.TransactionRetentiveId)
+                    .HasColumnName("Transaction_Retentive_Id")
+                    .HasColumnType("int(5)");
+
+                entity.Property(e => e.DateTimeFrom).HasColumnName("DateTime_From");
+
+                entity.Property(e => e.DateTimeTo).HasColumnName("DateTime_To");
+
+                entity.Property(e => e.Price).HasColumnType("decimal(5,0)");
+            });
+
+            modelBuilder.Entity<TransactionType>(entity =>
+            {
+                entity.ToTable("transaction_type", "cash");
+
+                entity.Property(e => e.TransactionTypeId)
+                    .HasColumnName("Transaction_Type_Id")
+                    .HasColumnType("int(5)");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+            });
+        }
+    }
+}
